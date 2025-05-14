@@ -1,0 +1,1340 @@
+/* static/style.css */
+:root {
+    --primary-color: #4a85e5;
+    --primary-light: #83b8ff;
+    --primary-dark: #0d47a1;
+    --secondary-color: #27ae60;
+    --secondary-light: #42d680;
+    --secondary-dark: #1f8b4c;
+    --accent-color: #e74c3c;
+    --accent-light: #ff6b6b;
+    --accent-dark: #c0392b;
+    --tertiary-color: #9b59b6;
+    --tertiary-light: #c39bd3;
+    --tertiary-dark: #7d3c98;
+    --bg-color: #f5f7fa;
+    --card-color: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #4a6075;
+    --text-muted: #95a5a6;
+    --border-color: #d7e3fc;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --info-color: #3498db;
+    --success-color: #2ecc71;
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --gradient-primary: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    --gradient-secondary: linear-gradient(135deg, var(--secondary-light), var(--secondary-color));
+    --gradient-accent: linear-gradient(135deg, var(--accent-light), var(--accent-color));
+    --gradient-tertiary: linear-gradient(135deg, var(--tertiary-light), var(--tertiary-color));
+    --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --transition-fast: 0.2s;
+    --transition-medium: 0.3s;
+    --transition-slow: 0.5s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+    background-image: linear-gradient(to bottom right, rgba(74, 133, 229, 0.05), rgba(155, 89, 182, 0.05));
+    zoom: 1;
+    /* 恢复到100%尺寸 */
+}
+
+.container {
+    background-color: var(--card-color);
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 98%;
+    max-width: 1800px;
+    text-align: center;
+    margin: 5px auto;
+    height: 97vh;
+    max-height: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    transform: scale(1);
+    transform-origin: center top;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+}
+
+h2 {
+    color: var(--secondary-color);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--gradient-secondary);
+    border-radius: 10px;
+}
+
+.section {
+    margin: 0;
+    border-radius: var(--radius-md);
+    padding: 15px;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.section:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+/* 调整视频容器样式 */
+.video-container {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 修改视频图像样式 */
+.video-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+    max-height: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.video-container:hover img {
+    transform: scale(1.02);
+}
+
+/* 视频区域调整 */
+.video-section {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(74, 133, 229, 0.03);
+    border: 1px solid rgba(74, 133, 229, 0.2);
+}
+
+.video-section h2 {
+    color: var(--primary-dark);
+}
+
+.detection-status {
+    margin: 5px 0;
+    padding: 6px 10px;
+    flex-shrink: 0;
+    /* 防止压缩 */
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.9rem;
+}
+
+#cat-detected {
+    font-weight: 600;
+    transition: color var(--transition-fast);
+    margin-left: 5px;
+}
+
+#cat-detected.detected {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#cat-detected.not-detected {
+    color: #ffcccc;
+}
+
+/* 传感器样式优化 */
+.sensor-section {
+    margin-bottom: 12px;
+}
+
+.sensor-section h2 {
+    color: var(--secondary-dark);
+}
+
+.sensor-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.sensor-item {
+    padding: 10px 6px;
+    width: 100%;
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-medium);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.sensor-item:nth-child(1) {
+    border-left: 4px solid var(--primary-color);
+}
+
+.sensor-item:nth-child(2) {
+    border-left: 4px solid var(--info-color);
+}
+
+.sensor-item:nth-child(3) {
+    border-left: 4px solid var(--tertiary-color);
+}
+
+.sensor-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.sensor-item:hover:nth-child(1) {
+    background: linear-gradient(to right, rgba(74, 133, 229, 0.1), white);
+}
+
+.sensor-item:hover:nth-child(2) {
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.1), white);
+}
+
+.sensor-item:hover:nth-child(3) {
+    background: linear-gradient(to right, rgba(155, 89, 182, 0.1), white);
+}
+
+.sensor-item .label {
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sensor-item span:not(.label) {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+}
+
+.sensor-item:nth-child(1) span:not(.label) {
+    color: var(--primary-color);
+}
+
+.sensor-item:nth-child(2) span:not(.label) {
+    color: var(--info-color);
+}
+
+.sensor-item:nth-child(3) span:not(.label) {
+    color: var(--tertiary-color);
+}
+
+.sensor-item i.fa-solid {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    opacity: 0.8;
+    transition: all var(--transition-medium);
+}
+
+.sensor-item:nth-child(1) i.fa-solid {
+    color: var(--primary-color);
+}
+
+.sensor-item:nth-child(2) i.fa-solid {
+    color: var(--info-color);
+}
+
+.sensor-item:nth-child(3) i.fa-solid {
+    color: var(--tertiary-color);
+}
+
+/* 控制面板样式增强 */
+.control-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(155, 89, 182, 0.03);
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    height: auto;
+}
+
+.control-section h2 {
+    color: var(--tertiary-dark);
+}
+
+.controls {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.mode-control {
+    padding: 8px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--bg-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-medium);
+}
+
+.mode-control:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--tertiary-light);
+}
+
+.mode-control label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+#feed-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background: var(--gradient-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#feed-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform var(--transition-fast);
+}
+
+#feed-button:hover {
+    background: var(--gradient-tertiary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+#feed-button:hover::after {
+    transform: translateX(0);
+}
+
+#feed-button:active {
+    transform: scale(0.98) translateY(0);
+}
+
+#feed-button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 页脚样式增强 */
+.footer {
+    padding: 8px;
+    margin-top: 5px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    background: linear-gradient(to right, rgba(74, 133, 229, 0.05), rgba(155, 89, 182, 0.05));
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* 添加图标相关样式 */
+i.fa-solid {
+    margin-right: 6px;
+}
+
+h1 i.fa-solid {
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+/* 添加左右布局样式 */
+.main-content {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100% - 80px);
+    /* 减少标题和页脚占用高度 */
+}
+
+.left-panel {
+    flex: 6;
+    /* 增大 */
+    display: flex;
+    flex-direction: column;
+}
+
+.middle-panel {
+    flex: 3;
+    /* 不变 */
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel {
+    flex: 3;
+    /* 缩小 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 调整面板高度 */
+.left-panel,
+.middle-panel,
+.right-panel {
+    height: 100%;
+    /* 确保面板填满高度 */
+    overflow: hidden;
+}
+
+/* 调整面板内部 section 高度 */
+.video-section,
+.control-panel-integrated,
+.feeding-system {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+/* 允许面板内部内容滚动 */
+.video-section .video-container {
+    flex: 1;
+    /* 让视频容器占据剩余空间 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-panel-integrated .dashboard,
+.feeding-system .dashboard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    padding-right: 5px;
+    /* 为滚动条留出空间 */
+}
+
+/* 微调内部元素间距和大小 */
+.dashboard-section {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.dashboard-section h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+}
+
+.sensor-item {
+    padding: 10px 6px;
+}
+
+.sensor-item .label {
+    font-size: 0.75rem;
+}
+
+.sensor-item span:not(.label) {
+    font-size: 1.3rem;
+}
+
+.sensor-item i.fa-solid {
+    font-size: 1.4rem;
+}
+
+.food-level-visual {
+    height: 120px;
+}
+
+.schedule-item {
+    padding: 10px 12px;
+}
+
+.action-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+/* 增强卡片悬停效果 */
+.sensor-item:hover i.fa-solid {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* 给按钮添加更多动画效果 */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(58, 123, 213, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(58, 123, 213, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(58, 123, 213, 0);
+    }
+}
+
+#feed-button:not(:disabled):hover {
+    animation: pulse 1.5s infinite;
+}
+
+/* 视频区域调整 */
+.video-section {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-section img {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    transition: filter var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.video-section img:hover {
+    filter: brightness(1.05);
+}
+
+/* 调整视频容器响应式设计 */
+@media (max-width: 1400px) {
+    .main-content {
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+    }
+
+    .left-panel,
+    .middle-panel,
+    .right-panel {
+        height: auto;
+        width: 100%;
+    }
+
+    .video-container {
+        height: 40vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+        min-height: 95vh;
+    }
+
+    .video-container {
+        height: 30vh;
+    }
+}
+
+/* 健康监测部分样式 */
+.health-section {
+    margin-bottom: 12px;
+    padding: 15px;
+    background: rgba(231, 76, 60, 0.03);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.health-section h2 {
+    color: var(--accent-dark);
+}
+
+.health-item {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.health-item:nth-child(1) {
+    border-left: 4px solid var(--accent-color);
+}
+
+.health-item:nth-child(2) {
+    border-left: 4px solid var(--info-color);
+}
+
+.health-item:hover:nth-child(1) {
+    background: linear-gradient(to right, rgba(231, 76, 60, 0.1), white);
+}
+
+.health-item:hover:nth-child(2) {
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.1), white);
+}
+
+.health-item:nth-child(1) i.fa-solid {
+    color: var(--accent-color);
+}
+
+.health-item:nth-child(2) i.fa-solid {
+    color: var(--info-color);
+}
+
+.health-item:nth-child(1) span:not(.label):not(.unit) {
+    color: var(--accent-color);
+}
+
+.health-item:nth-child(2) span:not(.label):not(.unit) {
+    color: var(--info-color);
+}
+
+.unit {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-left: 2px;
+}
+
+/* 进度条样式 */
+.progress-bar {
+    width: 80%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    margin: 10px auto 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.heart-rate-fill {
+    width: 75%;
+    /* 初始值75% */
+    background: linear-gradient(to right, #ffcccb, #e74c3c);
+}
+
+.oxygen-fill {
+    width: 98%;
+    /* 初始值98% */
+    background: linear-gradient(to right, #a9dfff, #3498db);
+}
+
+/* 控制中心集成布局 */
+.control-panel-integrated {
+    background: rgba(74, 133, 229, 0.05);
+    border: 1px solid rgba(74, 133, 229, 0.2);
+    padding: 15px;
+    height: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+}
+
+.control-panel-integrated .dashboard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dashboard-section:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.dashboard-section h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-section h3 i {
+    margin-right: 8px;
+}
+
+/* 环境数据部分 */
+.dashboard-section:nth-child(1) {
+    border-left: 4px solid var(--primary-color);
+}
+
+.dashboard-section:nth-child(1) h3 {
+    color: var(--primary-color);
+}
+
+.dashboard-section:nth-child(1) h3 i {
+    color: var(--primary-color);
+}
+
+/* 健康监测部分 */
+.dashboard-section:nth-child(2) {
+    border-left: 4px solid var(--accent-color);
+}
+
+.dashboard-section:nth-child(2) h3 {
+    color: var(--accent-color);
+}
+
+.dashboard-section:nth-child(2) h3 i {
+    color: var(--accent-color);
+}
+
+/* 喂食系统部分 */
+.dashboard-section:nth-child(3) {
+    border-left: 4px solid var(--secondary-color);
+}
+
+.dashboard-section:nth-child(3) h3 {
+    color: var(--secondary-color);
+}
+
+.dashboard-section:nth-child(3) h3 i {
+    color: var(--secondary-color);
+}
+
+/* 调整传感器数据布局 */
+.sensor-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+/* 喂食控制区样式 */
+.feeding-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feeding-item {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.feeding-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.mode-control {
+    padding: 8px 15px;
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 180px;
+}
+
+#feed-button {
+    margin-top: 0;
+    flex: 1;
+    min-width: 180px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .dashboard-section {
+        padding: 10px;
+    }
+
+    .feeding-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mode-control,
+    #feed-button {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* 让滑块开关样式重新生效 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #dfe6e9;
+    transition: .4s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+input:checked+.slider {
+    background-color: var(--secondary-color);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+}
+
+input:checked+.slider:before {
+    transform: translateX(30px);
+}
+
+.slider.round {
+    border-radius: 30px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+#mode-label {
+    font-weight: 600;
+    min-width: 80px;
+    text-align: left;
+    transition: color var(--transition-fast);
+}
+
+/* 消息样式 */
+.message {
+    margin-top: 15px;
+    font-weight: 500;
+    min-height: 1.2em;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-medium);
+}
+
+.message:empty {
+    display: none;
+}
+
+.message.success {
+    color: var(--success-color);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.message.error {
+    color: var(--danger-color);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.message.info {
+    color: var(--info-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* 喂食系统专用样式 */
+.feeding-system {
+    background: rgba(39, 174, 96, 0.05);
+    border: 1px solid rgba(39, 174, 96, 0.2);
+    padding: 15px;
+    height: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+}
+
+.feeding-system .dashboard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+/* 猫粮状态视觉效果 */
+.cat-food-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.food-level-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.food-level-visual {
+    width: 60%;
+    height: 120px;
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.food-level-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    /* 默认填充60% */
+    background: linear-gradient(to bottom, var(--secondary-light), var(--secondary-color));
+    transition: height 1s ease-in-out;
+}
+
+.food-level-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-dark);
+}
+
+.food-stats {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.stat-item {
+    background-color: #f9f9f9;
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    flex: 1;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.stat-item .label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-item .value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+/* 喂食计划样式 */
+.feeding-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.schedule-item .time {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.schedule-item .amount {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--secondary-color);
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.schedule-item .status {
+    font-size: 0.85rem;
+}
+
+.schedule-item .status.active {
+    color: var(--success-color);
+}
+
+/* 美化动作按钮 */
+.action-button {
+    background: var(--gradient-secondary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 10px 0;
+}
+
+.action-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    filter: brightness(1.05);
+}
+
+.action-button:active {
+    transform: translateY(-1px);
+}
+
+/* 添加用户面板样式 */
+.user-panel {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 5px 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+}
+
+.welcome-message {
+    margin-right: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.logout-button {
+    padding: 5px 10px;
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all var(--transition-fast);
+}
+
+.logout-button:hover {
+    background-color: var(--danger-color);
+    color: white;
+    border-color: var(--danger-color);
+}
+
+/* 添加喂食量输入控件样式 */
+.feed-amount-control {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.feed-amount-control label {
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.feed-amount-control input {
+    width: 70px;
+    padding: 5px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+}
+
+/* 添加设置表单样式 */
+.settings-form {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+}
+
+.action-button.small {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+/* 小型按钮样式 */
+.mini-button {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.mini-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+.delete-schedule:hover {
+    color: var(--danger-color);
+}
+
+h3 .mini-button {
+    margin-left: 10px;
+    font-size: 0.8rem;
+}
+
+/* 开关样式 */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #dfe6e9;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.toggle-slider {
+    background-color: var(--secondary-color);
+}
+
+input:checked+.toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 15px 0;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-button {
+    padding: 8px 15px;
+    background-color: #dfe6e9;
+    color: var(--text-primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cancel-button:hover {
+    background-color: #c8d6e5;
+}
+
+/* 修改现有的schedule-item样式 */
+.schedule-item {
+    margin-bottom: 8px;
+}
+
+.schedule-item .time {
+    flex: 1;
+}
+
+.schedule-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能猫咪喂食器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- 添加 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-cat"></i> 智能猫咪喂食系统</h1>
+
+        <div class="user-panel">
+            <span class="welcome-message">欢迎, {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-button"><i class="fa-solid fa-sign-out-alt"></i> 退出</a>
+        </div>
+
+        <div class="main-content">
+            <!-- 左侧：摄像头视频 -->
+            <div class="left-panel">
+                <div class="section video-section">
+                    <h2><i class="fa-solid fa-video"></i> 实时监控</h2>
+                    <div class="video-container">
+                        <img id="video-stream" src="{{ url_for('video_feed') }}" alt="摄像头视频流">
+                    </div>
+                    <p class="detection-status">
+                        <i class="fa-solid fa-search"></i> 猫咪检测状态: <span id="cat-detected">未知</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 右侧：传感器数据和基本控制 -->
+            <div class="right-panel">
+                <div class="section control-panel-integrated">
+                    <h2><i class="fa-solid fa-gauge-high"></i> 状态监控</h2>
+
+                    <div class="dashboard">
+                        <!-- 环境数据 -->
+                        <div class="dashboard-section">
+                            <h3><i class="fa-solid fa-thermometer-half"></i> 环境数据</h3>
+                            <div class="sensor-data">
+                                <div class="sensor-item">
+                                    <i class="fa-solid fa-temperature-half"></i>
+                                    <span class="label">温度</span>
+                                    <span id="temperature">--</span>°C
+                                </div>
+                                <div class="sensor-item">
+                                    <i class="fa-solid fa-droplet"></i>
+                                    <span class="label">湿度</span>
+                                    <span id="humidity">--</span>%
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 猫咪健康数据 -->
+                        <div class="dashboard-section">
+                            <h3><i class="fa-solid fa-heart-pulse"></i> 健康监测</h3>
+                            <div class="sensor-data">
+                                <div class="sensor-item health-item">
+                                    <i class="fa-solid fa-heartbeat"></i>
+                                    <span class="label">心率</span>
+                                    <span id="heart-rate">75</span>
+                                    <span class="unit">BPM</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill heart-rate-fill"></div>
+                                    </div>
+                                </div>
+                                <div class="sensor-item health-item">
+                                    <i class="fa-solid fa-lungs"></i>
+                                    <span class="label">血氧</span>
+                                    <span id="blood-oxygen">98</span>
+                                    <span class="unit">%</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill oxygen-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 猫粮信息 -->
+                        <div class="dashboard-section">
+                            <h3><i class="fa-solid fa-weight-scale"></i> 猫粮状态</h3>
+                            <div class="cat-food-info">
+                                <div class="food-level-container">
+                                    <div class="food-level-visual">
+                                        <div class="food-level-fill" id="food-level-fill"></div>
+                                    </div>
+                                    <div class="food-level-label">
+                                        <span>剩余量:</span>
+                                        <span id="weight">--</span>kg
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 喂食控制 -->
+                        <div class="dashboard-section">
+                            <h3><i class="fa-solid fa-sliders"></i> 喂食控制</h3>
+                            <div class="feeding-controls">
+                                <div class="mode-control">
+                                    <label for="mode-switch">运行模式:</label>
+                                    <div class="switch">
+                                        <input type="checkbox" id="mode-switch">
+                                        <span class="slider round"></span>
+                                    </div>
+                                    <span id="mode-label">手动模式</span>
+                                </div>
+                                <div class="feed-amount-control">
+                                    <label for="feed-amount">喂食量 (克):</label>
+                                    <input type="number" id="feed-amount" min="5" max="100"
+                                        value="{{ default_amount }}">
+                                </div>
+                                <button id="feed-button" class="action-button">
+                                    <i class="fa-solid fa-bowl-food"></i> 手动喂食
+                                </button>
+                                <p id="control-message" class="message"></p>
+                            </div>
+                        </div>
+
+                        <!-- 喂食计划 -->
+                        <div class="dashboard-section">
+                            <h3>
+                                <i class="fa-solid fa-calendar-check"></i> 喂食计划
+                                <button id="add-schedule-btn" class="mini-button">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </h3>
+                            <div class="feeding-schedule" id="schedule-container">
+                                {% if schedules %}
+                                {% for schedule in schedules %}
+                                <div class="schedule-item" data-id="{{ schedule.id }}">
+                                    <span class="time">{{ schedule.time }}</span>
+                                    <span class="amount">{{ schedule.amount }}g</span>
+                                    <div class="schedule-actions">
+                                        <button class="delete-schedule mini-button">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <p class="empty-message">暂无喂食计划，请添加</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- 系统设置 -->
+                        <div class="dashboard-section">
+                            <h3><i class="fa-solid fa-gear"></i> 系统设置</h3>
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="default-feed-amount">默认喂食量 (克):</label>
+                                    <input type="number" id="default-feed-amount" value="{{ default_amount }}" min="5"
+                                        max="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="min-food-level">最小食物水平 (kg):</label>
+                                    <input type="number" id="min-food-level" value="{{ min_food_level }}" min="0.1"
+                                        max="2" step="0.1">
+                                </div>
+                                <button id="save-settings" class="action-button small">
+                                    <i class="fa-solid fa-save"></i> 保存设置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 智能猫咪喂养系统 | <i class="fa-solid fa-code"></i> 树莓派物联网项目</p>
+        </footer>
+    </div>
+
+    <!-- 添加计划弹窗 -->
+    <div id="schedule-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>添加喂食计划</h2>
+            <form id="schedule-form">
+                <div class="form-group">
+                    <label for="schedule-time">喂食时间:</label>
+                    <input type="time" id="schedule-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="schedule-amount">喂食量 (克):</label>
+                    <input type="number" id="schedule-amount" value="30" min="5" max="100" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="action-button">保存</button>
+                    <button type="button" class="cancel-button" id="cancel-schedule">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
